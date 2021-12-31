@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>分页测试</title>
+</head>
+<body>
+<h3>查询所有用户</h3>
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>password</th>
+    </tr>
+    <tr th:each="user:${userPageInfo.list}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+    </tr>
+</table>
+<p>当前 <span th:text="${userPageInfo.pageNum}"></span> 页,总 <span th:text="${userPageInfo.pages}"></span> 页,共 <span th:text="${userPageInfo.total}"></span> 条记录</p>
+<a th:href="@{/user/list}">首页</a>
+<a th:href="@{/user/list(pageNum=${userPageInfo.hasPreviousPage}?${userPageInfo.prePage}:1)}">上一页</a>
+<a th:href="@{/user/list(pageNum=${userPageInfo.hasNextPage}?${userPageInfo.nextPage}:${userPageInfo.pages})}">下一页</a>
+<a th:href="@{/user/list(pageNum=${userPageInfo.pages})}">尾页</a>
+</body>
+</html>
